@@ -14,7 +14,6 @@ void WIFI::wifiUp() {
             delay(5000);
             Serial.print(".");
             oled.printString(".");
-            break;
         }
     }
     if (WL_CONNECTED) {
