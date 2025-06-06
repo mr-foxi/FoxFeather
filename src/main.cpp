@@ -2,6 +2,7 @@
 #include <esp32.h>
 #include <oled.h>
 #include <usb.h>
+#include <wifi.h>
 
 void setup() {
     #ifdef USB_h
@@ -9,10 +10,17 @@ void setup() {
     #endif
     #ifdef OLED_H
         oled.init();
-        String txt = "foxTest 00";
+        String txt = "foxTest 00 \n";
         oled.printString(txt);
     #endif
+
     Serial.println("foxTest 01");
+
+    delay(3000);
+    oled.refresh();
+
+    wifi.wifiUp();
+    http.httpRequest();
 }
 
 void loop () {

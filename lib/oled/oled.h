@@ -19,8 +19,12 @@ class oledWing
 public:
     oledWing();
     void init();
-    void testPrint();
+    void refresh();
+    // void testPrint();
+    void printlnString(String txt);
     void printString(String txt);
+    void printlnInt(int num);
+    void printInt(int num);
 };
 extern oledWing oled;
 

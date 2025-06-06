@@ -11,7 +11,7 @@ void oledWing::init() {
   // Since the buffer is intialized with an Adafruit splashscreen
   // internally, this will display the splashscreen.
   display.display();
-  delay(1000);
+  delay(500);
   // Clear the buffer.
   display.clearDisplay();
   display.display();
@@ -25,8 +25,25 @@ void oledWing::init() {
   pinMode(BUTTON_C, INPUT_PULLUP);
 }
 
+void oledWing::refresh() {
+  display.clearDisplay();
+  display.display();
+}
+
+void oledWing::printlnString(String txt) {
+  display.print(txt);
+  display.display(); // actually display all of the above
+}
 void oledWing::printString(String txt) {
-  display.println(txt);
+  display.print(txt);
+  display.display(); // actually display all of the above
+}
+void oledWing::printlnInt(int num) {
+  display.print(num);
+  display.display(); // actually display all of the above
+}
+void oledWing::printInt(int num) {
+  display.print(num);
   display.display(); // actually display all of the above
 }
 
