@@ -23,7 +23,7 @@ class wifiHTTP
 public:
     wifiHTTP();
     void httpRequest();
-    String HOST_NAME   = "http://example.com"; // CHANGE IT
+    String HOST_NAME   = "https://example.com"; // CHANGE IT
     String PATH_NAME   = "/test";// /products/arduino";      // CHANGE IT
     String queryString = "temperature=26&humidity=70"; // OPTIONAL
 };

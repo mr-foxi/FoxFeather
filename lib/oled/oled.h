@@ -19,7 +19,7 @@ class oledWing
 public:
     oledWing();
     void init();
-    void refresh();
+    void clear();
     // void testPrint();
     void printlnString(String txt);
     void printString(String txt);

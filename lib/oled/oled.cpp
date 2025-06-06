@@ -25,13 +25,14 @@ void oledWing::init() {
   pinMode(BUTTON_C, INPUT_PULLUP);
 }
 
-void oledWing::refresh() {
+void oledWing::clear() {
   display.clearDisplay();
-  display.display();
+  display.setCursor(0,0);  
+  // display.display();
 }
 
 void oledWing::printlnString(String txt) {
-  display.print(txt);
+  display.println(txt);
   display.display(); // actually display all of the above
 }
 void oledWing::printString(String txt) {
@@ -39,7 +40,7 @@ void oledWing::printString(String txt) {
   display.display(); // actually display all of the above
 }
 void oledWing::printlnInt(int num) {
-  display.print(num);
+  display.println(num);
   display.display(); // actually display all of the above
 }
 void oledWing::printInt(int num) {

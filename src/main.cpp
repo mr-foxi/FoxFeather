@@ -17,7 +17,7 @@ void setup() {
     Serial.println("foxTest 01");
 
     delay(3000);
-    oled.refresh();
+    oled.clear();
 
     wifi.wifiUp();
     http.httpRequest();
