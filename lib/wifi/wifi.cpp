@@ -1,10 +1,13 @@
 #include <wifi.h>
 #include <oled.h>
+/* !#!# DANGER !#!# DANGER !#!# DANGER !#!# */
+#include <pass.h>
+/* !#!# DANGER !#!# DANGER !#!# DANGER !#!# */
 
 WIFI::WIFI() {}
-wifiHTTP::wifiHTTP() {}
+// wifiHTTP::wifiHTTP() {}
 
-void WIFI::wifiUp() {
+void WIFI::up() {
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     Serial.print("Connecting");
     oled.printString("Connecting");
@@ -29,8 +32,14 @@ while(WiFi.status() != WL_CONNECTED) {
         oled.printlnString("WiFi Connection Failed");
     }
 }
-
-void wifiHTTP::httpRequest() {
+void WIFI::RSSI() {
+    int signal = WiFi.RSSI();
+    Serial.print("RSSI: ");
+    Serial.println(signal);
+    oled.printString("RSSI: ");
+    oled.printlnInt(signal);
+}
+void WIFI::httpRequest() {
     HTTPClient http;
     http.begin(HOST_NAME + PATH_NAME); //HTTP
     int httpCode = http.GET();
@@ -55,4 +64,4 @@ void wifiHTTP::httpRequest() {
     http.end();
 }
 WIFI wifi = WIFI();
-wifiHTTP http = wifiHTTP();
+// wifiHTTP http = wifiHTTP();

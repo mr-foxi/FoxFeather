@@ -3,24 +3,36 @@
 #include <oled.h>
 #include <usb.h>
 #include <wifi.h>
+#include <blue.h>
 
 void setup() {
     #ifdef USB_h
         usb.init();
+        Serial.println("foxTest 00: USB Serial");
     #endif
     #ifdef OLED_H
         oled.init();
-        String txt = "foxTest 00 \n";
-        oled.printString(txt);
+        oled.printlnString("foxTest 01: OLED");
     #endif
-
-    Serial.println("foxTest 01");
 
     delay(3000);
     oled.clear();
 
-    wifi.wifiUp();
-    http.httpRequest();
+    wifi.up();
+    wifi.RSSI();
+    wifi.httpRequest();
+    delay(3000);
+
+    blue.up();
+    delay(3000);
+    blue.poll();
+    delay(2000);
+    blue.poll();
+    delay(2000);
+
+    oled.clear();
+    oled.printlnString("foxTest Procedure");
+    oled.printlnString("Complete...");
 }
 
 void loop () {

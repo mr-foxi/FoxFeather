@@ -5,29 +5,25 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-const char WIFI_SSID[] = "EXAMPLE_SSID";         // CHANGE IT
-const char WIFI_PASSWORD[] = "EXAMPLE_PASSWD"; // CHANGE IT
-
-
-//String PATH_NAME   = "/products/arduino.php";      // CHANGE IT
-
 class WIFI
 {
 public:
     WIFI();
-    void wifiUp();
-};
-
-class wifiHTTP
-{
-public:
-    wifiHTTP();
+    void up();
+    void RSSI();
     void httpRequest();
-    String HOST_NAME   = "https://example.com"; // CHANGE IT
-    String PATH_NAME   = "/test";// /products/arduino";      // CHANGE IT
+    String HOST_NAME   = "http://httpforever.com";
+    String PATH_NAME   = "";
+    // String PATH_NAME   = "/products/arduino.php";
     String queryString = "temperature=26&humidity=70"; // OPTIONAL
 };
+
+// class wifiHTTP
+// {
+// public:
+//     wifiHTTP();
+// };
 extern WIFI wifi;
-extern wifiHTTP http;
+// extern wifiHTTP http;
 
 #endif

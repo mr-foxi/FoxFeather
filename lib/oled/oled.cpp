@@ -10,11 +10,16 @@ void oledWing::init() {
   // Show image buffer on the display hardware.
   // Since the buffer is intialized with an Adafruit splashscreen
   // internally, this will display the splashscreen.
+
+  display.clearDisplay(); // SPLASHSCREEN BUFFER DISPLAY BYPASS
   display.display();
-  delay(500);
+  display.clearDisplay(); // SPLASHSCREEN BUFFER DISPLAY BYPASS
+  display.display();
+
   // Clear the buffer.
   display.clearDisplay();
   display.display();
+
   // text display settings
   display.setRotation(1); 
   display.setTextSize(1);
