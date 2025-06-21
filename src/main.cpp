@@ -5,7 +5,7 @@
 #include <wifi.h>
 #include <blue.h>
 
-const int POLL_TIME = 500;
+const int POLL_TIME = 200;
 
 void setup() {
     #ifdef OLED_H
