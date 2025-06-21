@@ -1,16 +1,13 @@
 #include <Arduino.h>
 #include <esp32.h>
 #include <oled.h>
-// #include <usb.h>
 #include <serials.h>
 #include <wifi.h>
 #include <blue.h>
 
+const int POLL_TIME = 500;
+
 void setup() {
-    // #ifdef USB_h
-    //     usb.init();
-    //     Serial.println("foxTest 00: USB Serial");
-    // #endif
     #ifdef OLED_H
         oled.init();
         oled.printlnString("foxTest 01: OLED");
@@ -22,22 +19,22 @@ void setup() {
 
     delay(3000);
     oled.clear();
+    oled.clear();
+    oled.printlnString("!!  FoxDev BADUSB  !!");
 
     // wifi.up();
     // wifi.RSSI();
     // wifi.httpRequest();
     // delay(3000);
-
     // blue.up();
     // delay(3000);
     // blue.poll();
     // delay(2000);
     // blue.poll();
     // delay(2000);
-
-    oled.clear();
-    oled.printlnString("foxTest Procedure");
-    oled.printlnString("Complete...");
+    // oled.clear();
+    // oled.printlnString("foxTest Procedure");
+    // oled.printlnString("Complete...");
 
     // serials.pinSendHello();
     // oled.clear();
@@ -54,13 +51,11 @@ void loop () {
     //     display.display();
     // #endif
 
-    oled.clear();
-    // oled.printlnString("Init Arduino Com...");
-    // delay(1000);
-    serials.pinSendHello();
-
+    // serials.pinSendHello();
     String pinResponse = serials.pinRead();
     serials.checkResponse(pinResponse);
+    if(!digitalRead(BUTTON_A)) serials.sdPayload();
+    if(!digitalRead(BUTTON_B)) serials.pullScript();
 
-    delay(5000);
+    delay(POLL_TIME);
 }

@@ -10,10 +10,10 @@ const int SERIALS_BAUD = 115200;
 enum ResponseCode {
   RESPONSE_UNKNOWN,
   RESPONSE_HELLO,
-//   RESPONSE_PULLSCRIPT,
   RESPONSE_EMPTY,
+  RESPONSE_ROGER,
   RESPONSE_ERROR404,
-  RESPONSE_ERROR222,
+//   RESPONSE_ERROR222, GOOD DEBUG LINE
   RESPONSE_ERROR
 };
 
@@ -27,10 +27,8 @@ public:
     String pinRead();
     void print(String);
     void checkResponse(String);
-    // void usbUp();
-    // void pinUp();
-    // void usbDown();
-    // void pinDown();
+    void sdPayload();
+    void pullScript();
 };
 
 extern SERIALS serials;

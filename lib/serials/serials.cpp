@@ -18,14 +18,32 @@ void SERIALS::pinSendHello() {
     pinSerial.println("Hello DUE!");
 }
 
+void SERIALS::sdPayload() {
+    Serial.println();
+    Serial.println("Sending Command: sdPayload");
+    oled.clear();
+    oled.printlnString("Sending Command:");
+    oled.printlnString("sdPayload");
+    // pinSerial.println("sdPayload");
+    pinSerial.println("payload");
+}
+void SERIALS::pullScript() {
+    Serial.println();
+    Serial.println("Sending Command: pullScript");
+    oled.clear();
+    oled.printlnString("Sending Command:");
+    oled.printlnString("pullScript");
+    pinSerial.println("pullScript");
+}
+
 String SERIALS::pinRead() {
     if (pinSerial.available()) {
         String msg = pinSerial.readStringUntil('\n');
         msg.trim();
         return msg;
     } else {
-        // Serial.println("Serial pins not available...");
-        return "!ERROR: 222!";
+        return "";
+    //     return "!ERROR: 222!"; GOOD DEBUG LINE
     }
 }
 
@@ -38,17 +56,17 @@ ResponseCode parseResponse(String response) {
   response.trim();
   if (response == "") return RESPONSE_EMPTY;
   if (response == "Hello WING!") return RESPONSE_HELLO;
-//   if (response == "OK") return RESPONSE_PULLSCRIPT;
   if (response == "Error") return RESPONSE_ERROR;
   if (response == "!ERROR: 404!") return RESPONSE_ERROR404;
-  if (response == "!ERROR: 222!") return RESPONSE_ERROR222;
+//   if (response == "!ERROR: 222!") return RESPONSE_ERROR222; GOOD DEBUG LINE
+  if (response == "#Roger Roger#") return RESPONSE_ROGER;
   return RESPONSE_UNKNOWN;
 }
 
 void SERIALS::checkResponse(String response) {
     switch(parseResponse(response)) {
         case RESPONSE_EMPTY:
-            Serial.println("No Response Yet...");
+            // Serial.println("No Response Yet..."); GOOD DEBUG LINE
             break;
         case RESPONSE_ERROR:
             Serial.println("Response Error");
@@ -56,17 +74,21 @@ void SERIALS::checkResponse(String response) {
         case RESPONSE_ERROR404:
             Serial.println("!Error: 404! - Error Not Found");
             break;
-        case RESPONSE_ERROR222:
-            Serial.println("!Error: 222! - Serial Pin Not Available");
+        // case RESPONSE_ERROR222:
+        //     Serial.println("!Error: 222! - Serial Pin Not Available"); GOOD DEBUG LINE
+        //     break;
+        case RESPONSE_ROGER:
+            Serial.println("Roger Roger!");
+            // oled.clear();
+            oled.printlnString("Roger Roger!");
+            delay(3000);
+            oled.clear();
+            oled.printlnString("!!  FoxDev BADUSB  !!");
             break;
         case RESPONSE_HELLO:
-            oled.clear();
-            oled.printlnString("Recieved Hello!!!");
-            Serial.println("Recieved Hello!!");
+            oled.printString(".");
+            Serial.print(".");
             break;
-        // case RESPONSE_SDPAYLOAD:
-        //     sd.getPayload(response);
-        //     break;
         case RESPONSE_UNKNOWN:
             Serial.print("Unknown Response: ");
             Serial.println(response);
