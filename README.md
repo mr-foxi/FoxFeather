@@ -2,6 +2,7 @@
 
 ## Adafruit **ESP32** HUZZAH32, 128x64 OLED FeatherWing
 ## Made in Archlinux Visual Studio Code with **PlatformIO**
+## This project now heavily ties with dummyPayload.
 
 ### platform.ini Settings Information
 
