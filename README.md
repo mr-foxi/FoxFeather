@@ -18,10 +18,6 @@ To exclude a library from compiling, comment out the corrosponding line
 i.e: To exlude the OLED screen library from compiling.
 Change "-D OLED_h" to "; -D OLED_h"
 
-##### pass.h format: 
-const char WIFI_SSID[] = "YOUR_SSID"; 
-const char WIFI_PASSWORD[] = "YOUR_PASSWORD"; 
-
 ##### HUZZAH32 (ESP32)
 https://www.adafruit.com/product/3405
 ##### Arduino BLE
