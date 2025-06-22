@@ -19,6 +19,8 @@ class oledWing
 public:
     oledWing();
     void init();
+    void foxInit();
+    void foxClear();
     void clear();
     // void testPrint();
     void printlnString(String txt);

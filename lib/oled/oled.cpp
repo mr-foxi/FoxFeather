@@ -29,6 +29,36 @@ void oledWing::init() {
   pinMode(BUTTON_B, INPUT_PULLUP);
   pinMode(BUTTON_C, INPUT_PULLUP);
 }
+void oledWing::foxInit() {
+  delay(250); // wait for the OLED to power up
+  display.begin(0x3C, true); // Address 0x3C default
+  // Show image buffer on the display hardware.
+  // Since the buffer is intialized with an Adafruit splashscreen
+  // internally, this will display the splashscreen.
+
+  display.clearDisplay(); // SPLASHSCREEN BUFFER DISPLAY BYPASS
+  display.display();
+  display.clearDisplay(); // SPLASHSCREEN BUFFER DISPLAY BYPASS
+  display.display();
+
+  // Clear the buffer.
+  display.clearDisplay();
+  display.display();
+
+  // text display settings
+  display.setRotation(1); 
+  display.setTextSize(1);
+  display.setTextColor(SH110X_WHITE);
+  display.setCursor(0,0);
+  pinMode(BUTTON_A, INPUT_PULLUP);
+  pinMode(BUTTON_B, INPUT_PULLUP);
+  pinMode(BUTTON_C, INPUT_PULLUP);
+  oled.printlnString("!!  FoxDev BADUSB  !!");
+}
+void oledWing::foxClear() {
+  oled.clear();
+  oled.printlnString("!!  FoxDev BADUSB  !!");
+}
 
 void oledWing::clear() {
   display.clearDisplay();

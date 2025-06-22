@@ -82,8 +82,7 @@ void SERIALS::checkResponse(String response) {
             // oled.clear();
             oled.printlnString("Roger Roger!");
             delay(3000);
-            oled.clear();
-            oled.printlnString("!!  FoxDev BADUSB  !!");
+            oled.foxClear();
             break;
         case RESPONSE_HELLO:
             oled.printString(".");

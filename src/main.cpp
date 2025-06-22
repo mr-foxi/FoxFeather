@@ -5,22 +5,42 @@
 #include <wifi.h>
 #include <blue.h>
 
-const int POLL_TIME = 200;
+const int POLL_TIME = 5000;
+
+void pinMode_00() {
+    if(!digitalRead(BUTTON_A)) serials.sdPayload();
+    if(!digitalRead(BUTTON_B)) serials.pullScript();
+    if(!digitalRead(BUTTON_C)) wifi.sdPayload();
+}
+
+void pinMode_01() {
+    if(!digitalRead(BUTTON_A)) wifi.sdPayload();
+    if(!digitalRead(BUTTON_B)) wifi.pullScript();
+    if(!digitalRead(BUTTON_C)) serials.sdPayload();
+}
+
+void pinMode_02() {
+    if(!digitalRead(BUTTON_A)) wifi.sdPayload();
+    if(!digitalRead(BUTTON_B)) wifi.pullScript();
+    if(!digitalRead(BUTTON_C)) wifi.pullScriptExit();
+}
 
 void setup() {
     #ifdef OLED_H
         oled.init();
-        oled.printlnString("foxTest 01: OLED");
+        // oled.printlnString("foxTest 01: OLED");
     #endif
     #ifdef SERIALS_H
         serials.usbInit();
         serials.pinInit();
     #endif
 
-    delay(3000);
-    oled.clear();
+    // delay(3000);
+    // oled.clear();
     oled.clear();
     oled.printlnString("!!  FoxDev BADUSB  !!");
+
+    // wifi.apStart();
 
     // wifi.up();
     // wifi.RSSI();
@@ -51,11 +71,17 @@ void loop () {
     //     display.display();
     // #endif
 
-    // serials.pinSendHello();
     String pinResponse = serials.pinRead();
     serials.checkResponse(pinResponse);
-    if(!digitalRead(BUTTON_A)) serials.sdPayload();
-    if(!digitalRead(BUTTON_B)) serials.pullScript();
+
+    // if(!digitalRead(BUTTON_A)) serials.sdPayload();
+    // if(!digitalRead(BUTTON_B)) serials.pullScript();
+    // if(!digitalRead(BUTTON_C)) wifi.sdPayload();
+
+    pinMode_02();
+
+    // wifi.apRecieve();
+    // wifi.sendMessage();
 
     delay(POLL_TIME);
 }
