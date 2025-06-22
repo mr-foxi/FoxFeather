@@ -1,5 +1,6 @@
 # Fox Feather Project
 ## This project now heavily ties with dummyPayload.
+Sending payload activation commands over WiFi to a Pycom, before passing the request through to an Arduino
 
 ### Adafruit **ESP32** HUZZAH32, 128x64 OLED FeatherWing
 ### Made in Archlinux Visual Studio Code with **PlatformIO**
