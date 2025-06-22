@@ -5,7 +5,16 @@
 #include <wifi.h>
 #include <blue.h>
 
-const int POLL_TIME = 5000;
+const int POLL_TIME = 200;
+
+void pinMode_default() {
+    if(!digitalRead(BUTTON_A)) display.print("A");
+    if(!digitalRead(BUTTON_B)) display.print("B");
+    if(!digitalRead(BUTTON_C)) display.print("C");
+    delay(10);
+    yield();
+    display.display();
+}
 
 void pinMode_00() {
     if(!digitalRead(BUTTON_A)) serials.sdPayload();
@@ -35,13 +44,13 @@ void setup() {
         serials.pinInit();
     #endif
 
-    // delay(3000);
-    // oled.clear();
-    oled.clear();
+    delay(3000); //  DO NOT TOUCH
+    oled.clear(); //  DO NOT TOUCH
+    oled.clear(); //  DO NOT TOUCH
     oled.printlnString("!!  FoxDev BADUSB  !!");
 
-    // wifi.apStart();
 
+    // wifi.apStart();
     // wifi.up();
     // wifi.RSSI();
     // wifi.httpRequest();
@@ -55,33 +64,15 @@ void setup() {
     // oled.clear();
     // oled.printlnString("foxTest Procedure");
     // oled.printlnString("Complete...");
-
-    // serials.pinSendHello();
-    // oled.clear();
-    // oled.printlnString("Attempting Arduino Communication...");
 }
 
 void loop () {
-    // #ifdef OLED_H
-    //     if(!digitalRead(BUTTON_A)) display.print("A");
-    //     if(!digitalRead(BUTTON_B)) display.print("B");
-    //     if(!digitalRead(BUTTON_C)) display.print("C");
-    //     delay(10);
-    //     yield();
-    //     display.display();
-    // #endif
-
-    String pinResponse = serials.pinRead();
-    serials.checkResponse(pinResponse);
-
-    // if(!digitalRead(BUTTON_A)) serials.sdPayload();
-    // if(!digitalRead(BUTTON_B)) serials.pullScript();
-    // if(!digitalRead(BUTTON_C)) wifi.sdPayload();
-
-    pinMode_02();
+    // String pinResponse = serials.pinRead();
+    // serials.checkResponse(pinResponse);
 
     // wifi.apRecieve();
     // wifi.sendMessage();
-
+    
+    pinMode_02();
     delay(POLL_TIME);
 }

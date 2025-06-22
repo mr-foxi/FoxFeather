@@ -143,13 +143,14 @@ void WIFI::sdPayload() {
     // Connect to server
     WiFiClient client;
     if (client.connect(host, port)) {
+        oled.printString("$PAYLOAD$");
+        oled.printlnString("$SD$");
+        oled.printlnString("Roger Roger!");
         Serial.println("Connected to dummyPayload server.");
         Serial.println("Sending SD Payload Activion.");
-        oled.printlnString("sdPayload requested...");
         client.println("$PAYLOAD - SDCARD$");
         client.stop();
         Serial.println("Message sent and connection closed.");
-        oled.printlnString("Roger Roger...");
         delay(3000);
         oled.foxClear();
     } else {
@@ -176,13 +177,14 @@ void WIFI::pullScript() {
     // Connect to server
     WiFiClient client;
     if (client.connect(host, port)) {
+        oled.printString("$PAYLOAD$");
+        oled.printlnString("$PULLSCRIPT$");
+        oled.printlnString("Roger Roger!");
         Serial.println("Connected to dummyPayload server.");
         Serial.println("Sending Pull Script Payload Activion.");
-        oled.printlnString("pullScript requested...");
         client.println("$PAYLOAD - PULLSCRIPT$");
         client.stop();
         Serial.println("Message sent and connection closed.");
-        oled.printlnString("Roger Roger...");
         delay(5000);
         oled.foxClear();
     } else {
@@ -209,19 +211,20 @@ void WIFI::pullScriptExit() {
     // Connect to server
     WiFiClient client;
     if (client.connect(host, port)) {
+        oled.printString("$PAYLOAD$");
+        oled.printlnString("$PULLSCRIPTEXIT$");
+        oled.printlnString("Roger Roger!");
         Serial.println("Connected to dummyPayload server.");
         Serial.println("Sending Pull Script Exit Payload Activion.");
-        oled.printlnString("pullScriptExit requested...");
         client.println("$PAYLOAD - PULLSCRIPTEXIT$");
         client.stop();
         Serial.println("Message sent and connection closed.");
-        oled.printlnString("Roger Roger...");
-        delay(5000);
+        delay(3000);
         oled.foxClear();
     } else {
         Serial.println("Failed to connect to dummyPayload server.");
         oled.printlnString("Connect Failed...");
-        delay(5000);
+        delay(3000);
         oled.foxClear();
     }
 }
