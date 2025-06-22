@@ -1,0 +1,14 @@
+// PASS.CPP V00.00
+
+#include <pass.h>
+
+const char WIFI_SSID[] = "YOUR_WIFI_SSID"; 
+const char WIFI_PASSWORD[] = "YOUR_WIFI_PASSWORD"; 
+
+// Your Pycom's AP credentials
+const char* ESP_SSID = "esp-ap";
+const char* ESP_PASS = "TestPass42";
+// Server info
+const IPAddress ESP_IP(192, 168, 4 , 1);
+const IPAddress ESP_SUBNET(255, 255, 255, 0);
+const char16_t ESP_PORT = 1234;

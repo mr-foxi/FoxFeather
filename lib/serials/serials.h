@@ -29,6 +29,7 @@ public:
     void checkResponse(String);
     void sdPayload();
     void pullScript();
+    void pullScriptExit();
 };
 
 extern SERIALS serials;

@@ -1,5 +1,6 @@
 #include <serials.h>
 #include <oled.h>
+#include <payloadsList.h>
 
 HardwareSerial pinSerial(1); // Use UART1 (you can pick another depending on your setup)
 
@@ -18,6 +19,23 @@ void SERIALS::pinSendHello() {
     pinSerial.println("Hello DUE!");
 }
 
+// void SERIALS::sdPayload() {
+//     Serial.println();
+//     Serial.println("Sending Command: sdPayload");
+//     oled.clear();
+//     oled.printlnString("Sending Command:");
+//     oled.printlnString("sdPayload");
+//     // pinSerial.println("sdPayload");
+//     pinSerial.println("payload");
+// }
+// void SERIALS::pullScript() {
+//     Serial.println();
+//     Serial.println("Sending Command: pullScript");
+//     oled.clear();
+//     oled.printlnString("Sending Command:");
+//     oled.printlnString("pullScript");
+//     pinSerial.println("pullScript");
+// }
 void SERIALS::sdPayload() {
     Serial.println();
     Serial.println("Sending Command: sdPayload");
@@ -25,7 +43,7 @@ void SERIALS::sdPayload() {
     oled.printlnString("Sending Command:");
     oled.printlnString("sdPayload");
     // pinSerial.println("sdPayload");
-    pinSerial.println("payload");
+    pinSerial.println(payloadsList.CONST_SDCARD);
 }
 void SERIALS::pullScript() {
     Serial.println();
@@ -33,8 +51,17 @@ void SERIALS::pullScript() {
     oled.clear();
     oled.printlnString("Sending Command:");
     oled.printlnString("pullScript");
-    pinSerial.println("pullScript");
+    pinSerial.println(payloadsList.CONST_PULLSCRIPT);
 }
+void SERIALS::pullScriptExit() {
+    Serial.println();
+    Serial.println("Sending Command: pullScript");
+    oled.clear();
+    oled.printlnString("Sending Command:");
+    oled.printlnString("pullScriptExit");
+    pinSerial.println(payloadsList.CONST_PULLSCRIPTEXIT);
+}
+
 
 String SERIALS::pinRead() {
     if (pinSerial.available()) {

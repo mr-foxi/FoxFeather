@@ -1,20 +1,12 @@
 #include <wifi.h>
 #include <oled.h>
 #include <WiFi.h>
+#include <payloadsList.h>
 /* !#!# DANGER !#!# DANGER !#!# DANGER !#!# */
 #include <pass.h>
 /* !#!# DANGER !#!# DANGER !#!# DANGER !#!# */
 
-// Your Pycom's AP credentials
-const char* ESP_SSID = "esp-ap";
-const char* ESP_PASS = "TestPass42";
-
-// Server info
-const char* host = "192.168.4.1";
-const uint16_t port = 7408;
-
 WIFI::WIFI() {}
-// wifiHTTP::wifiHTTP() {}
 
 void WIFI::up() {
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -72,14 +64,13 @@ void WIFI::httpRequest() {
     }
     http.end();
 }
-WiFiServer server(port); // USING TCP ON PORT 7408
+WiFiServer server(ESP_PORT); // USING TCP ON PORT 7408
 void WIFI::apStart() {
-    // Serial.begin(115200);
-
+    WiFi.softAPConfig(ESP_IP, ESP_IP, ESP_SUBNET);
     // Start Wi-Fi in AP mode
     WiFi.softAP(ESP_SSID, ESP_PASS);
     Serial.println("Access Point Started");
-    Serial.println(WiFi.softAPIP()); // Should print 192.168.4.1
+    Serial.println(WiFi.softAPIP()); // Should print ESP_IP from pass.h
 
     // Start TCP server
     server.begin();
@@ -101,7 +92,6 @@ void WIFI::apRecieve() {
     }
 }
 void WIFI::sendMessage() {
-    //
     Serial.println("Connecting to AP...");
     WiFi.begin(ESP_SSID, ESP_PASS);
 
@@ -116,7 +106,7 @@ void WIFI::sendMessage() {
 
     // Connect to server
     WiFiClient client;
-    if (client.connect(host, port)) {
+    if (client.connect(ESP_IP, ESP_PORT)) {
         Serial.println("Connected to Pycom server.");
         Serial.println("Sending Test Payload.");
         client.println("$Test Payload$");
@@ -127,7 +117,8 @@ void WIFI::sendMessage() {
     }
 }
 void WIFI::sdPayload() {
-    //
+    oled.printlnString("$PAYLOAD$");
+    oled.printlnString("$SD$");
     Serial.println("Connecting to AP...");
     WiFi.begin(ESP_SSID, ESP_PASS);
 
@@ -142,13 +133,11 @@ void WIFI::sdPayload() {
 
     // Connect to server
     WiFiClient client;
-    if (client.connect(host, port)) {
-        oled.printString("$PAYLOAD$");
-        oled.printlnString("$SD$");
+    if (client.connect(ESP_IP, ESP_PORT)) {
         oled.printlnString("Roger Roger!");
         Serial.println("Connected to dummyPayload server.");
         Serial.println("Sending SD Payload Activion.");
-        client.println("$PAYLOAD - SDCARD$");
+        client.println(payloadsList.CONST_SDCARD);
         client.stop();
         Serial.println("Message sent and connection closed.");
         delay(3000);
@@ -161,7 +150,8 @@ void WIFI::sdPayload() {
     }
 }
 void WIFI::pullScript() {
-    //
+    oled.printlnString("$PAYLOAD$");
+    oled.printlnString("$PULLSCRIPT$");
     Serial.println("Connecting to AP...");
     WiFi.begin(ESP_SSID, ESP_PASS);
 
@@ -176,13 +166,11 @@ void WIFI::pullScript() {
 
     // Connect to server
     WiFiClient client;
-    if (client.connect(host, port)) {
-        oled.printString("$PAYLOAD$");
-        oled.printlnString("$PULLSCRIPT$");
+    if (client.connect(ESP_IP, ESP_PORT)) {
         oled.printlnString("Roger Roger!");
         Serial.println("Connected to dummyPayload server.");
         Serial.println("Sending Pull Script Payload Activion.");
-        client.println("$PAYLOAD - PULLSCRIPT$");
+        client.println(payloadsList.CONST_PULLSCRIPT);
         client.stop();
         Serial.println("Message sent and connection closed.");
         delay(5000);
@@ -195,7 +183,8 @@ void WIFI::pullScript() {
     }
 }
 void WIFI::pullScriptExit() {
-    //
+    oled.printlnString("$PAYLOAD$");
+    oled.printlnString("$PULLSCRIPTEXIT$");
     Serial.println("Connecting to AP...");
     WiFi.begin(ESP_SSID, ESP_PASS);
 
@@ -210,13 +199,11 @@ void WIFI::pullScriptExit() {
 
     // Connect to server
     WiFiClient client;
-    if (client.connect(host, port)) {
-        oled.printString("$PAYLOAD$");
-        oled.printlnString("$PULLSCRIPTEXIT$");
+    if (client.connect(ESP_IP, ESP_PORT)) {
         oled.printlnString("Roger Roger!");
         Serial.println("Connected to dummyPayload server.");
         Serial.println("Sending Pull Script Exit Payload Activion.");
-        client.println("$PAYLOAD - PULLSCRIPTEXIT$");
+        client.println(payloadsList.CONST_PULLSCRIPTEXIT);
         client.stop();
         Serial.println("Message sent and connection closed.");
         delay(3000);
@@ -229,4 +216,3 @@ void WIFI::pullScriptExit() {
     }
 }
 WIFI wifi = WIFI();
-// wifiHTTP http = wifiHTTP();
